@@ -62,7 +62,7 @@ const UserTable = ({ users }: TableProps) => {
                       }
                     >
                       {user.edad}
-                    </td>{" "}
+                    </td>
                     <td
                       className={
                         "px-6 py-4 whitespace-nowrap text-left  text-gray-900"
