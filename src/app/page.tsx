@@ -8,6 +8,7 @@ import UserForm from "@/components/UserForm";
 import { UserCircleIcon, CodeBracketIcon } from "@heroicons/react/24/solid";
 import Modal from "@/components/ui/Modal";
 import { User } from "@/models/User";
+import { TableLoading } from "@/components/ui/TableLoading";
 
 export default function Home() {
   const [userPaged, setUserPaged] = useState<UserPaged | null>(null);
@@ -87,6 +88,7 @@ export default function Home() {
           </a>
           <button
             onClick={openModal}
+            disabled={loading}
             className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
           >
             Agregar Usuario
@@ -94,7 +96,12 @@ export default function Home() {
         </div>
       </div>
 
-      <UserTable users={userPaged?.items || []} />
+      {loading ? (
+        <TableLoading />
+      ) : (
+        <UserTable users={userPaged?.items || []} />
+      )}
+
       <PaginationControls
         page={userPaged?.pageNumber || 0}
         totalPages={userPaged?.totalPages || 0}

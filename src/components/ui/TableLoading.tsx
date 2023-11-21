@@ -1,11 +1,8 @@
 import React from "react";
-import { User } from "@/models/User";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 
-interface TableProps {
-  users: User[];
-}
-
-const UserTable = ({ users }: TableProps) => {
+export const TableLoading = () => {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -41,31 +38,19 @@ const UserTable = ({ users }: TableProps) => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {users.map((user, index) => (
-                  <tr key={user.id}>
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-center">
-                      {user.id}
+                      <Skeleton circle={true} height={10} width={10} />
                     </td>
-                    <td
-                      className={
-                        "px-6 py-4 whitespace-nowrap text-left capitalize text-gray-900"
-                      }
-                    >
-                      {user.nombre}
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      <Skeleton height={20} />
                     </td>
-                    <td
-                      className={
-                        "px-6 py-4 whitespace-nowrap text-left capitalize text-gray-900"
-                      }
-                    >
-                      {user.edad}
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      <Skeleton height={20} />
                     </td>
-                    <td
-                      className={
-                        "px-6 py-4 whitespace-nowrap text-left  text-gray-900"
-                      }
-                    >
-                      {user.correo}
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      <Skeleton height={20} />
                     </td>
                   </tr>
                 ))}
@@ -77,5 +62,3 @@ const UserTable = ({ users }: TableProps) => {
     </div>
   );
 };
-
-export default UserTable;
