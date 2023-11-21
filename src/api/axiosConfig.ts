@@ -5,7 +5,6 @@ axiosRequest.defaults.baseURL = "https://redbrow-be-test.azurewebsites.net/api";
 
 axiosRequest.interceptors.response.use(
   (response) => {
-    console.log(response.data);
     return response;
   },
   async function (error) {
@@ -18,7 +17,6 @@ axiosRequest.interceptors.response.use(
         return Promise.reject(errorMessage);
       }
     } else {
-      console.log("No Axios Error:", error);
       return Promise.reject(error);
     }
   }

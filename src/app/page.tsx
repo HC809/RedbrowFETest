@@ -8,6 +8,7 @@ import UserForm from "@/components/UserForm";
 import { UserCircleIcon, CodeBracketIcon } from "@heroicons/react/24/solid";
 import Modal from "@/components/ui/Modal";
 import { TableLoading } from "@/components/ui/TableLoading";
+import { toast } from "sonner";
 
 export default function Home() {
   const [userPaged, setUserPaged] = useState<UserPaged | null>(null);
@@ -33,7 +34,7 @@ export default function Home() {
       );
       setUserPaged(response);
     } catch (error) {
-      console.error("Error al obtener los usuarios:", error);
+      toast.error(error as string);
     } finally {
       setLoading(false);
     }
