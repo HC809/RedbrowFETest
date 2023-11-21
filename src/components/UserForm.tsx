@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { User } from "@/models/User";
+import { apiRequest } from "@/api/apiConfig";
+import { toast } from "sonner";
 
 interface FormProps {
-  onCreateUser: (user: User) => void;
   closeModal: () => void;
 }
 
@@ -25,21 +26,40 @@ const UserSchema = Yup.object().shape({
     .required("La edad es obligatoria."),
 });
 
-const UserForm = ({ onCreateUser, closeModal }: FormProps) => {
-  const handleSubmit = (
+const UserForm = ({ closeModal }: FormProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleCreateUser = async (user: User): Promise<boolean> => {
+    setLoading(true);
+    try {
+      await apiRequest.postUser(user);
+      toast.success("Usuario creado correctamente.");
+      closeModal();
+      return true;
+    } catch (error) {
+      toast.error(error as string);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async (
     values: UserFormValues,
     { setSubmitting, resetForm }: FormikHelpers<UserFormValues>
   ) => {
-    console.log(values);
+    setLoading(true);
     const user: User = {
       id: 0,
       nombre: values.nombre,
       correo: values.correo,
       edad: values.edad,
     };
-    onCreateUser(user);
-    setSubmitting(false);
-    resetForm();
+    var isSuccess = await handleCreateUser(user);
+    if (isSuccess) {
+      setSubmitting(false);
+      resetForm();
+    }
   };
 
   return (
@@ -58,6 +78,7 @@ const UserForm = ({ onCreateUser, closeModal }: FormProps) => {
             Nuevo Usuario
             <button
               onClick={closeModal}
+              disabled={loading}
               className="float-right text-gray-600 hover:text-gray-900"
             >
               <span className="sr-only">Cerrar</span>
@@ -124,7 +145,7 @@ const UserForm = ({ onCreateUser, closeModal }: FormProps) => {
 
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || loading}
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:bg-purple-300"
           >
             Crear Usuario

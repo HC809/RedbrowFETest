@@ -13,7 +13,7 @@ axiosRequest.interceptors.response.use(
       if (!error.response) return Promise.reject("Error de conexión. ");
       else {
         const errorMessage =
-          (error.response && (error.response.data as string)) ||
+          (error.response && (error.response.data.message as string)) ||
           "Error desconocido.";
         return Promise.reject(errorMessage);
       }

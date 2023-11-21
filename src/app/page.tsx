@@ -7,7 +7,6 @@ import PaginationControls from "@/components/PaginationControls";
 import UserForm from "@/components/UserForm";
 import { UserCircleIcon, CodeBracketIcon } from "@heroicons/react/24/solid";
 import Modal from "@/components/ui/Modal";
-import { User } from "@/models/User";
 import { TableLoading } from "@/components/ui/TableLoading";
 
 export default function Home() {
@@ -59,14 +58,6 @@ export default function Home() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const handleCreateUser = useCallback(async (user: User) => {
-    try {
-      await apiRequest.postUser(user);
-    } catch (error) {
-      console.error("Error al crear el usuario:", error);
-    }
-  }, []);
-
   return (
     <main className="flex min-h-screen flex-col p-4">
       <div className="flex justify-between items-center mb-4">
@@ -110,7 +101,7 @@ export default function Home() {
       />
 
       <Modal isOpen={isModalOpen}>
-        <UserForm onCreateUser={handleCreateUser} closeModal={closeModal} />
+        <UserForm closeModal={closeModal} />
       </Modal>
     </main>
   );
