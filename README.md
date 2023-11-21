@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Redbrow Frontend Test App 🚀
 
-## Getting Started
+Este proyecto es una Web App desarrollada con [Next.js](https://nextjs.org/) que permite listar usuarios y crear nuevos usuarios. La interfaz es intuitiva y utiliza una tabla paginada para una navegación eficiente.
 
-First, run the development server:
+## 📋 Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework**: [Next.js](https://nextjs.org/) (v14)
+- **Lenguaje de Programación**: [TypeScript](https://www.typescriptlang.org/)
+- **Estilos**: [Tailwind CSS](https://tailwindcss.com/)
+- **Formularios**: [Formik](https://formik.org/) con validación de [Yup](https://github.com/jquense/yup)
+- **HTTP Client**: [Axios](https://axios-http.com/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔍 Funcionalidad
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Paginación de Usuarios**: Los usuarios se listan en una tabla con controles de paginación para una fácil navegación.
+- **Modal de Creación**: Un formulario en un modal permite la creación de nuevos usuarios.
+- **Integración API**: La Web App consume una API REST para obtener y enviar datos, utilizando Axios para las peticiones HTTP.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🌐 Enlaces Rápidos
 
-## Learn More
+- **Repositorio GitHub**: [RedbrowFETest en GitHub](https://github.com/HC809/RedbrowFETest)
+- **Demostración en Vivo**: [RedbrowFETest en Vercel](https://redbrow-fe-test.vercel.app/)
 
-To learn more about Next.js, take a look at the following resources:
+## 🐳 Despliegue con Docker
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Puedes ejecutar la aplicación localmente utilizando Docker. La imagen está disponible en Docker Hub.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Docker Hub**: [caballero809/redbrow-fe-test](https://hub.docker.com/r/caballero809/redbrow-fe-test)
+- **Descargar la Imagen**:
+  ```sh
+  docker pull caballero809/redbrow-fe-test
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+O puedes descargar el proyecto y hacerlo de manera manual:
+```sh
+git clone https://github.com/HC809/RedbrowFETest.git
+cd RedbrowFETest
+docker build -t redbrow-fe-test .
+docker run -p 3000:3000 redbrow-fe-test
